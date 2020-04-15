@@ -36,7 +36,6 @@ export class Game {
 
                 if (this.checkScore(this.dealer.score, 'Dealer')) {
                     this.dealer.scoreSet = 0
-                    this.player.upDateCountMoney(true)
                     break
                 }
             }
@@ -59,7 +58,6 @@ export class Game {
     playerHit(): void {
         let rndCard = this.randomCard()
 
-
         this.player.playerHitCard(rndCard)
 
         if (this.player.score)
@@ -75,7 +73,6 @@ export class Game {
         let counter = 0
         let time = setInterval(() => {
             counter++
-            console.log(counter)
             if (counter === 5) {
                 this.player.resetPlayerInfo()
                 this.dealer.resetDealerInfo()

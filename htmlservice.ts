@@ -2,6 +2,7 @@ import { Card } from "./Card";
 
 export class HtmlService {
 
+    // הדפסת קלפים למסך
     static printCards(cards: Card[], elemet: HTMLElement) {
         elemet.innerHTML = ''
         if (cards != null) {
@@ -12,7 +13,7 @@ export class HtmlService {
         }
     }
 
-
+    // הספדת הפקדה למסך
     static printDeposid(deposid: number, elemet: HTMLElement, elemetInput?: HTMLInputElement) {
         elemet.innerHTML = `Count: ${deposid}$`
 
@@ -21,11 +22,21 @@ export class HtmlService {
         }
     }
 
-
-    static clearBoards(pElement: HTMLElement, dElement: HTMLElement) {
+    // נקיון שולחן
+    static clearBoards(pElement: HTMLElement, dElement: HTMLElement, bElemet: HTMLElement) {
         pElement.innerHTML = ''
         dElement.innerHTML = ''
+        bElemet.innerHTML = ''
     }
+
+    // הדפסת הימור על המסך
+    static printBet(betVal: number, elemet: HTMLElement, elemetInput: HTMLInputElement) {
+        elemet.innerHTML = ` Bet:  /${betVal}`
+        elemetInput.value = ''
+    }
+
+
+
 
 
 }

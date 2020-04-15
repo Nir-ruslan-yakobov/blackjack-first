@@ -23,7 +23,6 @@ export class Game {
                 this.dealer.dealerGetCards(rndCard);
                 if (this.checkScore(this.dealer.score, 'Dealer')) {
                     this.dealer.scoreSet = 0;
-                    this.player.upDateCountMoney(true);
                     break;
                 }
             }
@@ -54,7 +53,6 @@ export class Game {
         let counter = 0;
         let time = setInterval(() => {
             counter++;
-            console.log(counter);
             if (counter === 5) {
                 this.player.resetPlayerInfo();
                 this.dealer.resetDealerInfo();

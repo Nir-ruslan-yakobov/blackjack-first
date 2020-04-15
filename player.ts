@@ -62,13 +62,14 @@ export class Player {
     //שחקן מהמר
     playerBet(betVal: number) {
         console.log(betVal)
-        if (this.deposid) {
+        if (this.deposid != null) {
             if (betVal > this.deposid) {
                 alert('Not enoght plaese deposid')
                 return false
             }
 
         }
+
         this._bet = betVal
         return true
     }
@@ -77,9 +78,10 @@ export class Player {
     resetPlayerInfo(): void {
         this._cards = []
         this._score = 0
+        this._bet = 0
     }
 
-
+    // עידכון תקציב
     upDateCountMoney(win: boolean) {
         if (this._bet != null && this._deposid != null) {
             if (win) {
@@ -87,7 +89,6 @@ export class Player {
             } else {
                 this._deposid -= this._bet
             }
-
         }
     }
 

@@ -31,19 +31,21 @@ setDeposid.addEventListener('click', () => {
 
 
 // סכום הימור
-let betInput = document.querySelector('#bet') as HTMLInputElement
-let betVal = document.querySelector('#betval') as HTMLElement
 const betting = document.querySelector('#betting') as HTMLButtonElement
+let betValBoard = document.querySelector('#betval') as HTMLElement
 betting.addEventListener('click', () => {
-    if (game.player.deposid == 0) {
-        alert('Deposid please')
-        return
+    let betInput = document.querySelector('#bet') as HTMLInputElement
+    if (game.player.deposid != null) {
+        if (game.player.deposid == 0) {
+            alert('Deposid please')
+            return
+        }
     }
 
     if (game.player.bet != null) {
         if (game.player.playerBet(+betInput.value)) {
-            betVal.innerHTML = ` Bet:  /${+betInput.value}`
-            betInput.value = ''
+            console.log('Bet set')
+            HtmlService.printBet(+betInput.value, betValBoard, betInput)
         }
     }
 
@@ -58,8 +60,15 @@ const start = document.querySelector('#start') as HTMLButtonElement
 let playerBoard = document.querySelector('#activecards') as HTMLElement
 let dealerBoard = document.querySelector('#dealeractivecards') as HTMLElement
 start.addEventListener('click', () => {
-    if (game.player.deposid == 0) {
-        alert('Deposid please')
+    if (game.player.deposid != null) {
+        if (game.player.deposid == 0) {
+            alert('Deposid please')
+            return
+        }
+    }
+
+    if (game.player.bet === 0) {
+        alert('Place a bet ')
         return
     }
 
@@ -89,8 +98,9 @@ playerHit.addEventListener('click', () => {
 
     if (game.player.score === 0) {
         game.nextRound((reset: boolean) => {
+            console.log(reset)
             if (reset && game.player.deposid) {
-                HtmlService.clearBoards(playerBoard, dealerBoard)
+                HtmlService.clearBoards(playerBoard, dealerBoard, betValBoard)
                 HtmlService.printDeposid(game.player.deposid, countMoney)
             }
         })
@@ -110,14 +120,16 @@ stay.addEventListener('click', () => {
         HtmlService.printCards(game.dealer.cards, dealerBoard)
     }
 
-    console.log(game.dealer.score)
+    console.log(game.dealer.score, 'Score')
+    console.log(game.player.deposid, 'Deposid')
 
 
     game.checkWinner()
 
     game.nextRound((reset: boolean) => {
-        if (reset && game.player.deposid) {
-            HtmlService.clearBoards(playerBoard, dealerBoard)
+        if (reset && game.player.deposid != null) {
+            console.log(reset)
+            HtmlService.clearBoards(playerBoard, dealerBoard, betValBoard)
             HtmlService.printDeposid(game.player.deposid, countMoney)
 
         }
