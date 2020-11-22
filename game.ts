@@ -73,11 +73,12 @@ export class Game {
         let counter = 0
         let time = setInterval(() => {
             counter++
-            if (counter === 5) {
+            if (counter === 2) {
                 this.player.resetPlayerInfo()
                 this.dealer.resetDealerInfo()
                 clearInterval(time)
                 callBack(true)
+                alert('NEXT ROUND')
             }
         }, 1000);
 
